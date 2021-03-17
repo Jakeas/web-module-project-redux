@@ -1,3 +1,2 @@
-export { ADD_FEATURES } from './featureActions'
-export { REMOVE_FEATURES } from './featureActions'
+export { ADD_FEATURES, addFeatures, REMOVE_FEATURES, removeFeatures } from './featureActions'
 

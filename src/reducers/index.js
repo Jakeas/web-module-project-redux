@@ -22,14 +22,39 @@ export const reducer = (state = initialState, action) => {
     console.log(action)
     switch (action.type) {
         case ADD_FEATURES:
+            console.log("AP1", action.payload)
             return{
                 ...state,
-                additionalFeatures:state.additionalFeatures.filter((item) => item.id === action.id)
+                car: {
+                    ...state.car,
+                    features: [
+                        ...state.car.features, action.payload
+                    ],
+                    price: state.car.price + action.payload.price
+                },
+                additionalFeatures:state.additionalFeatures.filter((feature) => { return (
+                    feature !== action.payload
+                )
+                })
             }
         case REMOVE_FEATURES:
             return{
                 ...state,
-                additionalFeatures: state.additionalFeatures.filter((item) => item.id !== action.id)
+                car: {
+                    ...state.car,
+                    features: [
+                        ...state.car.features.filter((feature) => {
+                            return (
+                                feature!== action.payload
+                            )
+                        })
+                    ],
+                    price:state.car.price - action.payload.price
+                },
+                additionalFeatures: [
+                    ...state.additionalFeatures,
+                    action.payload
+                ]
             }
 
         default:
